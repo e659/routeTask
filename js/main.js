@@ -1,30 +1,26 @@
 // Write a Function that take 2 integergers (n,m) then print all prime numbers between them
 
-const findPrimeNum = (n, m) => {
-  let temp;
-  let flag;
-  if (n > m) {
-    temp = n;
-    n = m;
-    m = temp;
-  }
-  for (let i = n; i <= m; i++) {
-    if (i == 1 || i == 0) {
-      return false;
+function printPrimesBetween(n, m) {
+  let result = [];
+  for (let i = n + 1; i < m; i++) {
+    if (isPrime(i)) {
+      result.push(i);
     }
-
-    flag = 1;
-    for (let j = 2; j < i / 2; ++j) {  
-      if (i % j == 0) {
-        flag = 0;
-        break;
-      }
-    }
-    if (flag == 1)
-    console.log(i)
   }
-};
+  console.log(result.join(' ')); // Print primes space-separated
+}
 
-const result=findPrimeNum(50,20);
+function isPrime(num) {
+  if (num <= 1) return false;
+  if (num === 2) return true;
+  if (num % 2 === 0) return false;
+  const sqrt = Math.sqrt(num);
+  for (let i = 3; i <= sqrt; i += 2) {
+    if (num % i === 0) return false;
+  }
+  return true;
+}
 
-console.log(result)
+// Example usage:
+printPrimesBetween(5, 10); // Output: 7
+printPrimesBetween(7, 20); // Output: 11 13 17 19
